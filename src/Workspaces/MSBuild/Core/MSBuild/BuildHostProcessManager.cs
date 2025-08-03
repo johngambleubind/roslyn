@@ -376,7 +376,10 @@ internal sealed class BuildHostProcessManager : IAsyncDisposable
         /// <summary>
         /// The time to wait for a named pipe connection to complete for a newly started server
         /// </summary>
-        internal const int TimeOutMsNewProcess = 60_000;
+        internal static readonly int TimeOutMsNewProcess =
+            int.TryParse(Environment.GetEnvironmentVariable("ROSLYN_BUILD_HOST_PIPE_TIMEOUT_MS"), out var value)
+                ? value
+                : 60_000;
 
         private readonly ILogger? _logger;
         private readonly Process _process;
