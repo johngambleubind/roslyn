@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - 'lsp-*'  # Only run when pushing tags like lsp-timeout-patch-v1
+  workflow_dispatch:
 
 jobs:
   build-and-release:
